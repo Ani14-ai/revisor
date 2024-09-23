@@ -167,8 +167,10 @@ def async_load_and_save(file_path):
     try:
         document_chunks = load_document_chunks(file_path)
         save_vector_store(document_chunks)
-    finally:
         os.remove(file_path)
+        logging.info("PDF processed successfully and vector store updated.")
+    except Exception as e:
+        logging.error(f"Error during document processing: {e}")
 
 @app.route('/api/ask', methods=['POST'])
 def ask_question():
