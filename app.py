@@ -181,6 +181,10 @@ def ask_question():
         abort(403, description="Invalid or missing API key")
 
     data = request.get_json()
+    if vector_store is None:
+            initialize_vector_store()
+    if vector_store is None:
+            return jsonify({"error": "The vector store is not ready yet. Please upload a document first."}), 503    
     if 'question' not in data or 'session_id' not in data:
         log_api_call('/api/ask', 400, (datetime.now(CANADA_TZ) - start_time).total_seconds())
         return jsonify({"error": "Missing required fields"}), 400
