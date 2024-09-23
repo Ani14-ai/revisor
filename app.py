@@ -138,14 +138,6 @@ def load_chat_history(session_id):
     chat_history_list = [{"user_input": row.user_input, "bot_response": row.bot_response} for row in chat_history]
     return chat_history_list
 
-@app.route('/')
-def home():
-    return render_template('index.html')
-
-@app.route('/<path:path>')
-def serve_page(path):
-    return render_template(path)
-
 @app.route('/api/upload_doc', methods=['POST'])
 def upload_pdf():
     start_time = datetime.now(CANADA_TZ)
