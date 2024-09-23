@@ -13,32 +13,15 @@ from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
-
-# Load environment variables
 load_dotenv()
-
-# Initialize the Flask app and configure CORS
 app = Flask(__name__)
 CORS(app, resources={"/api/*": {"origins": "*"}})
-
-# Canada timezone setup
 CANADA_TZ = timezone(timedelta(hours=-5))
-
-# Database connection string
-DB_CONNECTION_STRING = "DRIVER={ODBC Driver 17 for SQL Server};SERVER=103.239.89.99,21433;DATABASE=RetailMEApp_DB;UID=RetailMEAppUsr;PWD=App*Retail8usr"
-
-# Directory to persist the vector store
+DB_CONNECTION_STRING = "DRIVER={ODBC Driver 17 for SQL Server};SERVER=103.239.89.99,21433;DATABASE=MyRevisorAppDB;UID=MyRevisorAppUsr;PWD=MyRetr435*$h8"
 VECTOR_STORE_DIR = "persistent_vector_store"
-
-# Initialize logging
 logging.basicConfig(level=logging.INFO)
-
-# Initialize ThreadPoolExecutor for asynchronous processing
 executor = ThreadPoolExecutor(max_workers=4)
-
-# Global variable for the vector store
 vector_store = None
-
 def initialize_vector_store():
     """Initialize the vector store from the persistent directory, if it exists."""
     global vector_store
